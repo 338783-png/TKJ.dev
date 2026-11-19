@@ -269,6 +269,10 @@ export default {
       { t: 'Affidabilità', d: 'Impegni chiari, tempi realistici, lavoro documentato.' },
       { t: 'Risultati concreti', d: 'Ogni progetto parte da un problema aziendale e punta a un beneficio misurabile.' },
     ],
+    founderTitle: 'Fondatore',
+    founderText: 'TKJ.dev è guidato da Jordanie Tane Kenne, studente di ingegneria informatica all’Università di Modena e Reggio Emilia (UNIMORE), con focus su sviluppo backend e AI applicata. Parli direttamente con chi progetta e realizza il tuo progetto.',
+    founderLink: 'Vedi il portfolio del fondatore',
+    founderUrl: 'https://jordanie.moncvexpress.com/',
     diffTitle: 'Perché lavorare con noi',
     diff: [
       'Un rapporto diretto con il fondatore',

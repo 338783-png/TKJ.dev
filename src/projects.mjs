@@ -91,6 +91,24 @@ export default [
     },
   },
   {
+    slug: 'founder-portfolio',
+    type: 'personal',
+    year: 2026,
+    url: 'https://jordanie.moncvexpress.com/',
+    repo: `${GH}/cv-jordanie-tane`,
+    stack: ['HTML', 'CSS', 'JavaScript', 'i18n'],
+    title: {
+      en: 'Founder’s portfolio website',
+      it: 'Sito portfolio del fondatore',
+      fr: 'Site portfolio du fondateur',
+    },
+    summary: {
+      en: 'Multilingual personal portfolio presenting background, skills and projects: responsive static site with a language switcher, published on a custom subdomain.',
+      it: 'Portfolio personale multilingue che presenta percorso, competenze e progetti: sito statico responsive con selettore di lingua, pubblicato su un sottodominio dedicato.',
+      fr: 'Portfolio personnel multilingue présentant le parcours, les compétences et les projets : site statique responsive avec sélecteur de langue, publié sur un sous-domaine dédié.',
+    },
+  },
+  {
     slug: 'library-monitoring',
     type: 'academic',
     year: 2026,

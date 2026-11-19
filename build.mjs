@@ -640,6 +640,14 @@ ${cta(t, lang)}`;
                 <div class="about-cols">
                     ${map(a.paragraphs, (p) => `<p data-reveal>${esc(p)}</p>`)}
                 </div>
+                <div class="founder-card" data-reveal>
+                    <div class="founder-avatar" aria-hidden="true">JT</div>
+                    <div class="founder-body">
+                        <p class="aside-title">${esc(a.founderTitle)}</p>
+                        <p>${esc(a.founderText)}</p>
+                    </div>
+                    ${btn(a.founderUrl, a.founderLink, 'dark', 'rel="noopener"')}
+                </div>
             </div>
         </section>
 
