@@ -67,6 +67,8 @@ export default {
     rea: 'REA',
     pec: 'PEC',
     basedIn: 'Con sede in Italia · Operativi in Europa',
+    phone: 'Telefono',
+    whatsapp: 'WhatsApp',
     rights: 'Tutti i diritti riservati.',
   },
 
@@ -338,8 +340,10 @@ export default {
       minMessage: 'Aggiungi qualche dettaglio in più (almeno 20 caratteri).',
       privacy: 'Conferma di aver letto l’informativa privacy.',
     },
-    directTitle: 'Preferisci l’email?',
-    directText: 'Scrivici direttamente a',
+    directTitle: 'Preferisci un contatto diretto?',
+    directText: 'Scrivici, chiamaci o mandaci un messaggio WhatsApp:',
+    callLabel: 'Chiama',
+    whatsappLabel: 'Scrivici su WhatsApp',
     nextTitle: 'Cosa succede dopo',
     next: [
       'Leggiamo la tua richiesta e ne confermiamo la ricezione.',
@@ -379,6 +383,10 @@ export default {
       {
         h: 'Conservazione',
         p: ['Le richieste che non portano a un contratto sono cancellate al più tardi {retentionMonths} mesi dopo l’ultimo scambio. Se segue un contratto, i dati sono conservati per la durata necessaria al contratto e agli obblighi fiscali e contabili applicabili. I log del server sono conservati dal fornitore di hosting per un periodo limitato.'],
+      },
+      {
+        h: 'WhatsApp',
+        p: ['Se ci contatti tramite WhatsApp, la conversazione è trattata anche da WhatsApp (Meta) secondo la propria informativa privacy. Utilizziamo questi messaggi solo per rispondere alla tua richiesta, alle stesse condizioni descritte sopra.'],
       },
       {
         h: 'Destinatari',

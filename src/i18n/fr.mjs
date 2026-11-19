@@ -67,6 +67,8 @@ export default {
     rea: 'REA',
     pec: 'PEC',
     basedIn: 'Basé en Italie · Actif en Europe',
+    phone: 'Téléphone',
+    whatsapp: 'WhatsApp',
     rights: 'Tous droits réservés.',
   },
 
@@ -338,8 +340,10 @@ export default {
       minMessage: 'Merci de donner un peu plus de détails (20 caractères minimum).',
       privacy: 'Veuillez confirmer avoir lu la politique de confidentialité.',
     },
-    directTitle: 'Vous préférez l’email ?',
-    directText: 'Écrivez-nous directement à',
+    directTitle: 'Vous préférez un contact direct ?',
+    directText: 'Écrivez-nous, appelez-nous ou envoyez un message WhatsApp :',
+    callLabel: 'Appeler',
+    whatsappLabel: 'Écrire sur WhatsApp',
     nextTitle: 'La suite',
     next: [
       'Nous lisons votre demande et en confirmons la réception.',
@@ -379,6 +383,10 @@ export default {
       {
         h: 'Durée de conservation',
         p: ['Les demandes qui n’aboutissent pas à un contrat sont supprimées au plus tard {retentionMonths} mois après notre dernier échange. Si un contrat suit, les données sont conservées pendant la durée nécessaire au contrat et aux obligations fiscales et comptables applicables. Les journaux du serveur sont conservés par l’hébergeur pendant une durée limitée.'],
+      },
+      {
+        h: 'WhatsApp',
+        p: ['Si vous nous contactez via WhatsApp, l’échange est également traité par WhatsApp (Meta) selon sa propre politique de confidentialité. Nous utilisons ces messages uniquement pour répondre à votre demande, dans les mêmes conditions que celles décrites ci-dessus.'],
       },
       {
         h: 'Destinataires',

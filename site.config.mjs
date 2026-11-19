@@ -16,7 +16,12 @@ export default {
 
   contact: {
     // Public professional email address shown on the site.
-    email: 'TODO@tkj.dev',
+    email: '338783@studenti.unimore.it',
+    // Phone number as displayed, and the same number in international format for tel: links.
+    phone: '+39 351 864 5657',
+    phoneIntl: '+393518645657',
+    // WhatsApp number: digits only, with country code, no "+" (used in https://wa.me/<number>).
+    whatsapp: '393518645657',
     // Form endpoint that accepts POST requests (e.g. Formspree, Basin, or your own API).
     // Leave empty to fall back to opening the visitor's email client (mailto).
     formEndpoint: '',

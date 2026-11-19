@@ -42,6 +42,8 @@ const fill = (tpl, vars) => tpl.replace(/\{(\w+)\}/g, (m, k) => (k in vars ? var
 const url = (lang, path = '') => (lang === DEFAULT_LANG ? `/${path}` : `/${lang}/${path}`);
 const pageUrl = (lang, key) => url(lang, PAGES.find((p) => p.key === key).path);
 const isTodo = (v) => !v || /TODO/.test(String(v));
+const telHref = () => `tel:${config.contact.phoneIntl}`;
+const waHref = () => `https://wa.me/${config.contact.whatsapp}`;
 const pad = (n) => String(n).padStart(2, '0');
 const map = (arr, fn) => arr.map(fn).join('');
 
@@ -52,6 +54,8 @@ const ICONS = {
   data: '<path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/>',
   arrow: '<path d="M5 12h14M13 6l6 6-6 6"/>',
   arrowUpRight: '<path d="M7 17L17 7M8 7h9v9"/>',
+  phone: '<path d="M5 4h4l2 5-2.5 1.5a11 11 0 005 5L15 13l5 2v4a2 2 0 01-2 2A16 16 0 013 6a2 2 0 012-2"/>',
+  whatsapp: '<path d="M3 21l1.65-4.8A9 9 0 1112 21a8.9 8.9 0 01-4.2-1.05L3 21z"/><path d="M9 9.5c0 3 2.5 5.5 5.5 5.5l1-1.5-2-1-1 .8a4 4 0 01-1.8-1.8l.8-1-1-2L9 9.5z"/>',
   mail: '<rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3.5 6.5L12 13l8.5-6.5"/>',
 };
 const icon = (name, cls = 'icon') =>
@@ -204,7 +208,10 @@ function layout({ t, lang, key, path, body, noindex = false }) {
                 <ul class="menu-list">${menuLinks}</ul>
             </nav>
             <div class="menu-foot">
-                <a class="menu-mail" href="mailto:${esc(config.contact.email)}">${esc(config.contact.email)}</a>
+                <div class="menu-contacts">
+                    <a class="menu-mail" href="mailto:${esc(config.contact.email)}">${esc(config.contact.email)}</a>
+                    ${config.contact.whatsapp ? `<a class="menu-mail" href="${waHref()}" rel="noopener">${icon('whatsapp', 'icon icon-inline')} ${esc(config.contact.phone)}</a>` : ''}
+                </div>
                 ${langSwitch('lang-menu')}
             </div>
         </div>
@@ -229,6 +236,8 @@ ${body}
                     <h2 class="ftr-title">${esc(t.common.footerContact)}</h2>
                     <ul class="ftr-list">
                         <li><a href="mailto:${esc(config.contact.email)}">${esc(config.contact.email)}</a></li>
+                        ${config.contact.phone ? `<li><a href="${telHref()}">${esc(config.contact.phone)}</a></li>` : ''}
+                        ${config.contact.whatsapp ? `<li><a href="${waHref()}" rel="noopener">${esc(t.common.whatsapp)}</a></li>` : ''}
                         <li>${esc(t.common.basedIn)}</li>
                     </ul>
                 </div>
@@ -728,6 +737,10 @@ ${cta(t, lang)}`;
                         <p class="aside-title">${esc(c.directTitle)}</p>
                         <p>${esc(c.directText)}</p>
                         <a class="aside-mail" href="mailto:${esc(config.contact.email)}" data-cursor="link">${esc(config.contact.email)}</a>
+                        <div class="aside-actions">
+                            ${config.contact.phone ? `<a class="aside-btn" href="${telHref()}">${icon('phone', 'icon')}<span><small>${esc(c.callLabel)}</small>${esc(config.contact.phone)}</span></a>` : ''}
+                            ${config.contact.whatsapp ? `<a class="aside-btn aside-btn-wa" href="${waHref()}" rel="noopener">${icon('whatsapp', 'icon')}<span><small>WhatsApp</small>${esc(c.whatsappLabel)}</span></a>` : ''}
+                        </div>
                     </div>
                 </aside>
             </div>
