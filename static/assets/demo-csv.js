@@ -492,6 +492,15 @@
       URL.revokeObjectURL(a.href);
       a.remove();
     }, 500);
+
+    // Visible confirmation + next step.
+    const done = $('[data-demo-done]');
+    $('[data-demo-done-title]').textContent = T.exported.replace('{file}', a.download);
+    done.hidden = false;
+    done.classList.remove('is-shown');
+    requestAnimationFrame(() => done.classList.add('is-shown'));
+    done.focus({ preventScroll: true });
+    done.scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'nearest' });
   }
 
   /* ---------- errors ---------- */
@@ -549,6 +558,7 @@
   $('[data-demo-export]').addEventListener('click', exportSummary);
   $('[data-demo-print]').addEventListener('click', () => window.print());
   $('[data-demo-reset]').addEventListener('click', () => {
+    $('[data-demo-done]').hidden = true;
     $('[data-demo-results]').hidden = true;
     $('[data-demo-start]').hidden = false;
     $('[data-demo-file]').value = '';

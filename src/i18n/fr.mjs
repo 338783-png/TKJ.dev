@@ -472,6 +472,10 @@ export default {
     exportCsv: 'Exporter le résumé (CSV)',
     print: 'Imprimer / PDF',
     reset: 'Charger un autre fichier',
+    exported: 'Résumé exporté : {file}',
+    exportedHint: 'Ouvrez-le avec Excel, Google Sheets ou LibreOffice.',
+    nextStep: 'La démo vous plaît ? Réalisons-la avec vos données.',
+    validate: 'Je veux ça pour mon entreprise',
     errors: {
       empty: 'Le fichier est vide ou illisible.',
       noDate: 'Aucune colonne de dates trouvée. Vérifiez que le fichier contient une colonne de dates.',

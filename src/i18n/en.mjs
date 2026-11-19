@@ -472,6 +472,10 @@ export default {
     exportCsv: 'Export summary (CSV)',
     print: 'Print / PDF',
     reset: 'Load another file',
+    exported: 'Summary exported: {file}',
+    exportedHint: 'Open it in Excel, Google Sheets or LibreOffice.',
+    nextStep: 'Liked the demo? Let’s build it with your own data.',
+    validate: 'Request this for my business',
     errors: {
       empty: 'The file is empty or could not be read.',
       noDate: 'No date column was found. Check that the file has a column with dates.',

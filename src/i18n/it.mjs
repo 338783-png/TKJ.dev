@@ -472,6 +472,10 @@ export default {
     exportCsv: 'Esporta il riepilogo (CSV)',
     print: 'Stampa / PDF',
     reset: 'Carica un altro file',
+    exported: 'Riepilogo esportato: {file}',
+    exportedHint: 'Aprilo con Excel, Google Fogli o LibreOffice.',
+    nextStep: 'Ti piace la demo? Realizziamola con i tuoi dati.',
+    validate: 'Lo voglio per la mia azienda',
     errors: {
       empty: 'Il file è vuoto o non può essere letto.',
       noDate: 'Nessuna colonna di date trovata. Verifica che il file contenga una colonna con delle date.',

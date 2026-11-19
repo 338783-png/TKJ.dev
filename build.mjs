@@ -907,10 +907,24 @@ ${cta(t, lang)}`;
                             </div>
                         </div>
 
-                        <div class="dz-footer">
+                        <div class="dz-footer" data-wa-avoid>
                             <button type="button" class="btn btn-dark" data-demo-export><span class="btn-label" data-text="${esc(d.exportCsv)}"><span>${esc(d.exportCsv)}</span></span><span class="btn-icon">${icon('arrow', 'icon')}</span></button>
                             <button type="button" class="chip" data-demo-print>${esc(d.print)}</button>
                             <button type="button" class="chip" data-demo-reset>${esc(d.reset)}</button>
+                        </div>
+
+                        <div class="dz-done" data-demo-done data-wa-avoid hidden tabindex="-1">
+                            <div class="dz-done-msg" role="status">
+                                <span class="dz-done-check" aria-hidden="true">✓</span>
+                                <div>
+                                    <p class="dz-done-title" data-demo-done-title></p>
+                                    <p class="dz-done-hint">${esc(d.exportedHint)}</p>
+                                </div>
+                            </div>
+                            <div class="dz-done-next">
+                                <p>${esc(d.nextStep)}</p>
+                                ${btn(pageUrl(lang, 'contact') + '?service=data', d.validate, 'primary')}
+                            </div>
                         </div>
                     </div>
                     <script type="application/json" data-demo-i18n>${JSON.stringify(i18n).replace(/</g, '\\u003c')}</script>

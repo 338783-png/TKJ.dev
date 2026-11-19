@@ -111,7 +111,16 @@
 
   /* ---------- floating WhatsApp button: appears after the first screen ---------- */
   const waFloat = $('[data-wa-float]');
-  if (waFloat) onScroll.push((y) => waFloat.classList.toggle('is-visible', y > window.innerHeight * 0.6));
+  if (waFloat) {
+    // Step aside when it would cover an important call to action (or the footer, which has the link anyway).
+    const blockers = new Set();
+    const avoidIO = new IntersectionObserver((entries) => {
+      entries.forEach((e) => (e.isIntersecting ? blockers.add(e.target) : blockers.delete(e.target)));
+      runScroll();
+    }, { rootMargin: '0px 0px -40px 0px' });
+    $$('[data-wa-avoid], .cta, .ftr').forEach((el) => avoidIO.observe(el));
+    onScroll.push((y) => waFloat.classList.toggle('is-visible', y > window.innerHeight * 0.6 && blockers.size === 0));
+  }
 
   /* ---------- full-screen menu ---------- */
   const menu = $('[data-menu]');
@@ -426,6 +435,13 @@
   const loadedAt = Date.now();
   const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
   const errors = t.errors || {};
+
+  // Preselect a service from the URL (e.g. /contact/?service=data, linked from a demo).
+  const preset = new URLSearchParams(location.search).get('service');
+  if (preset) {
+    const radio = $$('input[name="service"]', form).find((r) => r.value === preset);
+    if (radio) radio.checked = true;
+  }
 
   $$('[data-autosize]', form).forEach((ta) => {
     const fit = () => {
