@@ -31,6 +31,7 @@ const TYPES = {
   '.jpg': 'image/jpeg',
   '.webp': 'image/webp',
   '.woff2': 'font/woff2',
+  '.csv': 'text/csv; charset=utf-8',
 };
 
 async function resolveFile(urlPath) {

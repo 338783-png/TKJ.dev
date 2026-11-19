@@ -25,6 +25,7 @@ const PAGES = [
   { key: 'process', path: 'process/' },
   { key: 'contact', path: 'contact/' },
   { key: 'privacy', path: 'privacy/' },
+  { key: 'demo', path: 'projects/csv-dashboard/' },
 ];
 const NAV = ['services', 'projects', 'about', 'process', 'contact'];
 
@@ -124,9 +125,51 @@ function diagram(caption) {
                 </figure>`;
 }
 
+// ---------- structured data (JSON-LD, not executed: allowed by the CSP) ----------
+
+function structuredData(t, lang) {
+  const org = {
+    '@context': 'https://schema.org',
+    '@type': 'ProfessionalService',
+    name: config.brand.name,
+    slogan: config.brand.signature,
+    description: t.meta.home.description,
+    url: config.siteUrl + url(lang),
+    logo: `${config.siteUrl}/assets/og.png`,
+    image: `${config.siteUrl}/assets/og.png`,
+    email: config.contact.email,
+    ...(config.contact.phoneIntl ? { telephone: config.contact.phoneIntl } : {}),
+    address: { '@type': 'PostalAddress', addressCountry: 'IT' },
+    areaServed: [{ '@type': 'Country', name: 'Italy' }, { '@type': 'Place', name: 'Europe' }],
+    knowsLanguage: config.languages,
+    inLanguage: lang,
+    hasOfferCatalog: {
+      '@type': 'OfferCatalog',
+      name: t.services.title,
+      itemListElement: t.services.domains.map((d) => ({
+        '@type': 'Offer',
+        itemOffered: { '@type': 'Service', name: d.title, description: d.summary },
+      })),
+    },
+  };
+  const faq = {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    inLanguage: lang,
+    mainEntity: t.faq.items.map((f) => ({
+      '@type': 'Question',
+      name: f.q,
+      acceptedAnswer: { '@type': 'Answer', text: f.a },
+    })),
+  };
+  const json = (o) => JSON.stringify(o).replace(/</g, '\\u003c');
+  return `<script type="application/ld+json">${json(org)}</script>
+    <script type="application/ld+json">${json(faq)}</script>`;
+}
+
 // ---------- layout ----------
 
-function layout({ t, lang, key, path, body, noindex = false }) {
+function layout({ t, lang, key, path, body, noindex = false, scripts = [] }) {
   const meta = t.meta[key];
   const canonical = config.siteUrl + url(lang, path);
   const alternates = config.languages
@@ -173,12 +216,19 @@ function layout({ t, lang, key, path, body, noindex = false }) {
     <meta property="og:description" content="${esc(meta.description)}">
     <meta property="og:url" content="${canonical}">
     <meta property="og:locale" content="${t.locale}">
+    <meta property="og:image" content="${config.siteUrl}/assets/og.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="${esc(config.brand.name)} — ${esc(config.brand.signature)}">
+    <meta name="twitter:card" content="summary_large_image">
     <meta name="theme-color" content="#0B111D">
     <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
     <link rel="preload" href="/assets/fonts/bricolage-grotesque-latin-standard-normal.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="stylesheet" href="/assets/styles.css">
     <script src="/assets/boot.js"></script>
     <script src="/assets/main.js" defer></script>
+    ${scripts.map((src) => `<script src="${src}" defer></script>`).join('\n    ')}
+    ${key === 'home' ? structuredData(t, lang) : ''}
 </head>
 <body class="page-${key}">
     <a class="skip-link" href="#main">${esc(t.common.skip)}</a>
@@ -257,6 +307,7 @@ ${body}
         </div>
         <div class="ftr-word" aria-hidden="true" data-reveal="rise"><span>TKJ</span><span class="ftr-word-tld">.dev</span></div>
     </footer>
+    ${key !== 'contact' && config.contact.whatsapp ? `<a class="wa-float" href="${waHref()}" rel="noopener" aria-label="${esc(t.contact.whatsappLabel)}" data-wa-float>${icon('whatsapp', 'icon')}<span class="wa-float-label">WhatsApp</span></a>` : ''}
 </body>
 </html>
 `;
@@ -302,6 +353,7 @@ const cta = (t, lang) => `
 
 function projectCard(p, t, lang) {
   const links = [];
+  if (p.page) links.push(`<a class="pj-main" href="${pageUrl(lang, p.page)}">${esc(t.projects.openDemo)} ${icon('arrowUpRight', 'icon icon-inline')}</a>`);
   if (p.url) links.push(`<a href="${esc(p.url)}" rel="noopener">${esc(t.projects.live)} ${icon('arrowUpRight', 'icon icon-inline')}</a>`);
   if (p.repo) links.push(`<a href="${esc(p.repo)}" rel="noopener">${esc(t.projects.source)} ${icon('arrowUpRight', 'icon icon-inline')}</a>`);
   return `
@@ -330,6 +382,35 @@ const projectsEmpty = (t, lang) => `
                     ${btn(pageUrl(lang, 'contact'), t.common.ctaPrimary, 'dark')}
                 </div>
             </div>`;
+
+const nextCard = (t) => `
+                <article class="pj pj-next" data-reveal>
+                    <div class="pj-meta"><span class="badge badge-demo">${esc(t.projects.types.demo)}</span><span class="pj-year">…</span></div>
+                    <h3>${esc(t.projects.nextTitle)}</h3>
+                    <p>${esc(t.projects.nextText)}</p>
+                    <div class="lab-progress" aria-hidden="true"><span></span></div>
+                </article>`;
+
+const faqSection = (t) => `
+        <section class="sec sec-light faq-sec">
+            <div class="wrap split">
+                <div class="split-aside">
+                    ${kicker('05', t.faq.title)}
+                    <h2 class="h-xl" data-split>${esc(t.faq.title)}</h2>
+                    <p class="sec-lead" data-reveal>${esc(t.faq.lead)}</p>
+                </div>
+                <div class="faq">
+                    ${map(
+                      t.faq.items,
+                      (f, i) => `
+                    <details class="faq-item" data-reveal>
+                        <summary><span class="faq-num">${pad(i + 1)}</span><span class="faq-q">${esc(f.q)}</span><span class="faq-icon" aria-hidden="true"></span></summary>
+                        <div class="faq-a"><p>${esc(f.a)}</p></div>
+                    </details>`
+                    )}
+                </div>
+            </div>
+        </section>`;
 
 const legend = (t) => `
                 <div class="legend" data-reveal>
@@ -457,12 +538,13 @@ ${marquee(h.marquee)}
                 </div>
                 ${
                   featured.length
-                    ? `<div class="pj-grid">${map(featured, (p) => projectCard(p, t, lang))}</div>
+                    ? `<div class="pj-grid">${map(featured, (p) => projectCard(p, t, lang))}${featured.length < 3 ? nextCard(t) : ''}</div>
                 <p class="sec-more" data-reveal>${btn(pageUrl(lang, 'projects'), t.common.allProjects, 'dark')}</p>`
                     : projectsEmpty(t, lang)
                 }
             </div>
         </section>
+${faqSection(t)}
 ${cta(t, lang)}`;
   },
 
@@ -540,7 +622,7 @@ ${cta(t, lang)}`;
                 ${filters}
                 ${
                   projects.length
-                    ? `<div class="pj-grid" data-project-grid>${map(projects, (pr) => projectCard(pr, t, lang))}</div>
+                    ? `<div class="pj-grid" data-project-grid>${map(projects, (pr) => projectCard(pr, t, lang))}${nextCard(t)}</div>
                 <p class="empty-filter" hidden data-empty-filter>${esc(p.noneOfType)}</p>`
                     : projectsEmpty(t, lang)
                 }
@@ -747,6 +829,108 @@ ${cta(t, lang)}`;
         </section>`;
   },
 
+  demo(t, lang) {
+    const d = t.demo;
+    const i18n = { ...d, month: d.month, errors: d.errors };
+    return `
+        <section class="phero">
+            <div class="phero-grid" aria-hidden="true"></div>
+            <div class="wrap">
+                <p class="kicker"><a class="kicker-back" href="${pageUrl(lang, 'projects')}">← ${esc(d.back)}</a><span class="kicker-line" aria-hidden="true"></span><span class="badge badge-demo">${esc(d.kicker)}</span></p>
+                <h1 class="display" data-split>${esc(d.title)}</h1>
+                <p class="phero-lead" data-reveal>${esc(d.lead)}</p>
+            </div>
+        </section>
+
+        <section class="sec sec-light demo-intro">
+            <div class="wrap">
+                <div class="demo-facts">
+                    ${map(
+                      [
+                        [d.problemTitle, d.problem],
+                        [d.solutionTitle, d.solution],
+                        [d.stackTitle, d.stack],
+                      ],
+                      ([h, p], i) => `
+                    <div data-reveal>
+                        <p class="aside-title">${pad(i + 1)} — ${esc(h)}</p>
+                        <p>${esc(p)}</p>
+                    </div>`
+                    )}
+                </div>
+                <p class="demo-honesty" data-reveal>${esc(d.honesty)}</p>
+
+                <div class="dz" data-demo-csv data-sample="/demos/sample-sales.csv" data-lang="${lang}">
+                    <div class="dz-start" data-demo-start data-reveal>
+                        <div class="dz-drop" data-demo-drop>
+                            <div class="dz-drop-icon" aria-hidden="true">${icon('data', 'icon')}</div>
+                            <div class="dz-actions">
+                                <button type="button" class="btn btn-primary" data-demo-sample><span class="btn-label" data-text="${esc(d.loadSample)}"><span>${esc(d.loadSample)}</span></span><span class="btn-icon">${icon('arrow', 'icon')}</span></button>
+                                <label class="btn btn-ghost-light dz-file">
+                                    <input type="file" accept=".csv,text/csv,text/plain" data-demo-file>
+                                    <span>${esc(d.upload)}</span>
+                                </label>
+                            </div>
+                            <p class="dz-hint">${esc(d.drop)} · ${esc(d.privacy)}</p>
+                        </div>
+                        <p class="dz-error" role="alert" data-demo-error hidden></p>
+                    </div>
+
+                    <div class="dz-results" data-demo-results hidden>
+                        <div class="dz-toolbar">
+                            <div class="dz-source"><span class="dz-dot" aria-hidden="true"></span><span data-demo-source></span></div>
+                            <div class="dz-selects">
+                                <label>${esc(d.dateCol)}<select data-sel="date"></select></label>
+                                <label>${esc(d.valueCol)}<select data-sel="value"></select></label>
+                                <label>${esc(d.catCol)}<select data-sel="cat"></select></label>
+                            </div>
+                        </div>
+
+                        <div class="dz-kpis" data-demo-kpis></div>
+
+                        <div class="dz-grid">
+                            <figure class="dz-card dz-card-wide">
+                                <figcaption>${esc(d.chartMonthly)}</figcaption>
+                                <div class="dz-chart" data-chart="monthly"></div>
+                                <details class="dz-table-toggle"><summary>${esc(d.tableToggle)}</summary><div class="dz-table-wrap"><table class="dz-table" data-table="monthly"></table></div></details>
+                            </figure>
+                            <figure class="dz-card" data-card="top">
+                                <figcaption>${esc(d.chartTop)}</figcaption>
+                                <div class="dz-chart" data-chart="top"></div>
+                                <details class="dz-table-toggle"><summary>${esc(d.tableToggle)}</summary><div class="dz-table-wrap"><table class="dz-table" data-table="top"></table></div></details>
+                            </figure>
+                            <div class="dz-card">
+                                <p class="dz-card-title">${esc(d.report)}</p>
+                                <ul class="dz-report" data-demo-report></ul>
+                                <p class="dz-card-title dz-card-title-spaced">${esc(d.previewTitle)} <span class="dz-muted" data-preview-note></span></p>
+                                <div class="dz-table-wrap"><table class="dz-table" data-table="preview"></table></div>
+                            </div>
+                        </div>
+
+                        <div class="dz-footer">
+                            <button type="button" class="btn btn-dark" data-demo-export><span class="btn-label" data-text="${esc(d.exportCsv)}"><span>${esc(d.exportCsv)}</span></span><span class="btn-icon">${icon('arrow', 'icon')}</span></button>
+                            <button type="button" class="chip" data-demo-print>${esc(d.print)}</button>
+                            <button type="button" class="chip" data-demo-reset>${esc(d.reset)}</button>
+                        </div>
+                    </div>
+                    <script type="application/json" data-demo-i18n>${JSON.stringify(i18n).replace(/</g, '\\u003c')}</script>
+                </div>
+            </div>
+        </section>
+
+        <section class="cta">
+            <div class="wrap">
+                <div class="cta-row cta-row-top" data-reveal>
+                    <div>
+                        <h2 class="cta-title">${esc(d.ctaTitle)}</h2>
+                        <p>${esc(d.ctaText)}</p>
+                    </div>
+                    ${btn(pageUrl(lang, 'contact'), t.common.ctaPrimary, 'light')}
+                </div>
+            </div>
+        </section>`;
+  },
+
   privacy(t, lang) {
     const p = t.privacy;
     const vars = {
@@ -869,6 +1053,9 @@ function validate() {
     if (!PROJECT_TYPES.includes(p.type)) {
       throw new Error(`projects[${i}] (${p.slug ?? '?'}): type must be one of ${PROJECT_TYPES.join(', ')}.`);
     }
+    if (p.page && !PAGES.some((pg) => pg.key === p.page)) {
+      throw new Error(`projects[${i}] (${p.slug ?? '?'}): page "${p.page}" does not exist in PAGES.`);
+    }
     if (!p.title?.[DEFAULT_LANG] || !p.summary?.[DEFAULT_LANG]) {
       throw new Error(`projects[${i}] (${p.slug ?? '?'}): title and summary are required in "${DEFAULT_LANG}".`);
     }
@@ -908,7 +1095,8 @@ async function build() {
     const prefix = lang === DEFAULT_LANG ? '' : `${lang}/`;
     for (const page of PAGES) {
       const body = pages[page.key](t, lang);
-      await write(`${prefix}${page.path}index.html`, layout({ t, lang, key: page.key, path: page.path, body }));
+      const scripts = page.key === 'demo' ? ['/assets/demo-csv.js'] : [];
+      await write(`${prefix}${page.path}index.html`, layout({ t, lang, key: page.key, path: page.path, body, scripts }));
       count++;
     }
     await write(`${prefix}404.html`, layout({ t, lang, key: 'notFound', path: '', body: notFoundBody(t, lang), noindex: true }));

@@ -109,6 +109,10 @@
     lastY = y;
   });
 
+  /* ---------- floating WhatsApp button: appears after the first screen ---------- */
+  const waFloat = $('[data-wa-float]');
+  if (waFloat) onScroll.push((y) => waFloat.classList.toggle('is-visible', y > window.innerHeight * 0.6));
+
   /* ---------- full-screen menu ---------- */
   const menu = $('[data-menu]');
   const burger = $('[data-menu-toggle]');

@@ -34,6 +34,17 @@ Pages: Home, Services, Projects, About, Process, Contact, Privacy Policy, plus a
 - **Contact form**: has the fields listed in the plan (section 8.6), client-side validation, a honeypot plus a minimum fill time against spam, and a privacy acknowledgement. If `contact.formEndpoint` is set, the form POSTs to it (works as-is with Formspree, Basin, etc.). Otherwise it opens the visitor's email client with the request already filled in.
 - **Security headers**: `dist/_headers` (Netlify / Cloudflare Pages format) sets a strict CSP, HSTS, nosniff and the referrer policy. The form endpoint origin is added automatically.
 
+## Demos
+
+- **CSV dashboard** (`/projects/csv-dashboard/`, script `static/assets/demo-csv.js`, sample data `static/demos/sample-sales.csv`, fictitious). Reads a CSV entirely in the browser, auto-detects separator, decimal mark, date format and columns, then shows KPIs, a monthly column chart, top categories, an import report and a data preview. Charts are hand-drawn SVG with tooltips (hover and keyboard focus) and a table view. The summary can be exported to CSV or printed.
+- To add a demo: create its page in `build.mjs` (`PAGES` + a `pages.<key>` function), add its texts to the three dictionaries, and add a portfolio entry in `src/projects.mjs` with `type: 'demo'` and `page: '<key>'`.
+
+## SEO & sharing
+
+- `static/assets/og.png` (1200×630) is the image shown when a link is shared (LinkedIn, WhatsApp…).
+- The home page includes structured data (JSON-LD): `ProfessionalService` (services, contact, languages, area served) and `FAQPage`.
+- `sitemap.xml` and `hreflang` links are generated for every language.
+
 ## Before going live
 
 The build lists the remaining items each time it runs. In particular:
