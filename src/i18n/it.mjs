@@ -112,7 +112,7 @@ export default {
     servicesLead: 'Quattro aree complementari, un solo obiettivo: soluzioni che funzionano per la tua azienda.',
 
     projectsTitle: 'Progetti',
-    projectsLead: 'Ogni progetto è indicato per ciò che è: lavoro per un cliente, progetto personale, dimostrazione o prototipo.',
+    projectsLead: 'Ogni progetto è indicato per ciò che è: lavoro per un cliente, tirocinio, progetto personale o universitario, dimostrazione o prototipo.',
 
     processTitle: 'Un approccio progressivo',
     processLead: 'Analisi, prototipo, validazione, realizzazione. Sai sempre a che punto è il progetto.',
@@ -213,7 +213,7 @@ export default {
 
   projects: {
     title: 'Progetti',
-    lead: 'Distinguiamo chiaramente i lavori reali per clienti dai progetti personali, dalle dimostrazioni tecniche e dai prototipi.',
+    lead: 'Distinguiamo chiaramente i lavori reali per clienti dai tirocini, dai progetti personali e universitari, dalle dimostrazioni tecniche e dai prototipi.',
     filterLabel: 'Filtra per tipo',
     filterAll: 'Tutti',
     types: {
@@ -221,12 +221,16 @@ export default {
       personal: 'Progetto personale',
       demo: 'Demo tecnica',
       prototype: 'Prototipo',
+      internship: 'Tirocinio aziendale',
+      academic: 'Progetto universitario',
     },
     typesPlural: {
       client: 'Progetti cliente',
       personal: 'Progetti personali',
       demo: 'Demo',
       prototype: 'Prototipi',
+      internship: 'Tirocini',
+      academic: 'Progetti universitari',
     },
     legendTitle: 'Come leggere questa pagina',
     legend: {
@@ -234,6 +238,8 @@ export default {
       personal: 'Realizzato di nostra iniziativa.',
       demo: 'Realizzato per dimostrare una tecnica o una soluzione.',
       prototype: 'Una prima versione usata per validare un’idea.',
+      internship: 'Realizzato durante un tirocinio in azienda, con il suo consenso a essere citata.',
+      academic: 'Realizzato nell’ambito degli studi universitari.',
     },
     emptyTitle: 'Prime dimostrazioni in preparazione',
     emptyText: 'Stiamo preparando dimostrazioni tecniche di sviluppo web, automazione e IA. Saranno pubblicate qui, chiaramente identificate. Nel frattempo, saremo felici di illustrarti il nostro approccio in una breve call.',

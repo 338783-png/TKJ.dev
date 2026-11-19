@@ -1518,17 +1518,13 @@ body::after {
 }
 .legend dl {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 0;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 260px), 1fr));
+  gap: 0 32px;
   margin: 0;
-  border-top: 1px solid var(--line-light);
 }
 .legend dl > div {
-  padding: 22px 22px 22px 0;
-}
-.legend dl > div + div {
-  padding-left: 22px;
-  border-left: 1px solid var(--line-light);
+  padding: 18px 0;
+  border-top: 1px solid var(--line-light);
 }
 .legend dd {
   margin: 12px 0 0;
@@ -1558,6 +1554,8 @@ body::after {
 .badge-personal { background: #ede9fe; color: #5b21b6; }
 .badge-demo { background: #dbeafe; color: #1e40af; }
 .badge-prototype { background: #fef3c7; color: #92400e; }
+.badge-internship { background: #cffafe; color: #155e75; }
+.badge-academic { background: #fce7f3; color: #9d174d; }
 
 .filters {
   display: flex;
@@ -3112,16 +3110,6 @@ body::after {
     grid-template-columns: 1fr 1fr;
     gap: 32px;
   }
-  .legend dl {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-  .legend dl > div:nth-child(3) {
-    padding-left: 0;
-    border-left: 0;
-  }
-  .legend dl > div:nth-child(n + 3) {
-    border-top: 1px solid var(--line-light);
-  }
   .ftr-grid {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
@@ -3274,17 +3262,6 @@ body::after {
   }
   .quote-list {
     columns: 1;
-  }
-  .legend dl {
-    grid-template-columns: 1fr;
-  }
-  .legend dl > div,
-  .legend dl > div + div {
-    padding: 18px 0;
-    border-left: 0;
-  }
-  .legend dl > div + div {
-    border-top: 1px solid var(--line-light);
   }
   .ftr-grid {
     grid-template-columns: 1fr 1fr;

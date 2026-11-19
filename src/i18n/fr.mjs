@@ -112,7 +112,7 @@ export default {
     servicesLead: 'Quatre domaines complémentaires, un seul objectif : des solutions qui fonctionnent pour votre entreprise.',
 
     projectsTitle: 'Projets',
-    projectsLead: 'Chaque projet est présenté pour ce qu’il est : mission client, projet personnel, démonstration ou prototype.',
+    projectsLead: 'Chaque projet est présenté pour ce qu’il est : mission client, stage, projet personnel ou universitaire, démonstration ou prototype.',
 
     processTitle: 'Une approche progressive',
     processLead: 'Diagnostic, prototype, validation, réalisation. Vous savez toujours où en est le projet.',
@@ -213,7 +213,7 @@ export default {
 
   projects: {
     title: 'Projets',
-    lead: 'Nous distinguons clairement les missions clients réelles des projets personnels, des démonstrations techniques et des prototypes.',
+    lead: 'Nous distinguons clairement les missions clients réelles des stages, des projets personnels et universitaires, des démonstrations techniques et des prototypes.',
     filterLabel: 'Filtrer par type',
     filterAll: 'Tous',
     types: {
@@ -221,12 +221,16 @@ export default {
       personal: 'Projet personnel',
       demo: 'Démo technique',
       prototype: 'Prototype',
+      internship: 'Stage en entreprise',
+      academic: 'Projet universitaire',
     },
     typesPlural: {
       client: 'Projets clients',
       personal: 'Projets personnels',
       demo: 'Démos',
       prototype: 'Prototypes',
+      internship: 'Stages',
+      academic: 'Projets universitaires',
     },
     legendTitle: 'Comment lire cette page',
     legend: {
@@ -234,6 +238,8 @@ export default {
       personal: 'Réalisé de notre propre initiative.',
       demo: 'Réalisé pour démontrer une technique ou une solution.',
       prototype: 'Une première version servant à valider une idée.',
+      internship: 'Réalisé pendant un stage en entreprise, avec son accord pour être citée.',
+      academic: 'Réalisé dans le cadre des études universitaires.',
     },
     emptyTitle: 'Premières démonstrations en préparation',
     emptyText: 'Nous préparons des démonstrations techniques en développement web, automatisation et IA. Elles seront publiées ici, clairement identifiées. En attendant, nous vous présentons volontiers notre approche lors d’un court échange.',

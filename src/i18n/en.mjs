@@ -112,7 +112,7 @@ export default {
     servicesLead: 'Four complementary areas, one goal: solutions that work for your business.',
 
     projectsTitle: 'Projects',
-    projectsLead: 'Every project is labelled for what it is: client work, personal project, demonstration or prototype.',
+    projectsLead: 'Every project is labelled for what it is: client work, internship, personal or university project, demonstration or prototype.',
 
     processTitle: 'A progressive approach',
     processLead: 'Diagnosis, prototype, validation, build. You always know where the project stands.',
@@ -213,7 +213,7 @@ export default {
 
   projects: {
     title: 'Projects',
-    lead: 'We clearly separate real client work from personal projects, technical demonstrations and prototypes.',
+    lead: 'We clearly separate real client work from internships, personal and university projects, technical demonstrations and prototypes.',
     filterLabel: 'Filter by type',
     filterAll: 'All',
     types: {
@@ -221,12 +221,16 @@ export default {
       personal: 'Personal project',
       demo: 'Technical demo',
       prototype: 'Prototype',
+      internship: 'Internship',
+      academic: 'University project',
     },
     typesPlural: {
       client: 'Client projects',
       personal: 'Personal projects',
       demo: 'Demos',
       prototype: 'Prototypes',
+      internship: 'Internships',
+      academic: 'University projects',
     },
     legendTitle: 'How to read this page',
     legend: {
@@ -234,6 +238,8 @@ export default {
       personal: 'Built on our own initiative.',
       demo: 'Built to demonstrate a technique or a solution.',
       prototype: 'An early version used to validate an idea.',
+      internship: 'Carried out during an internship in a company, with its agreement to be named.',
+      academic: 'Carried out as part of university studies.',
     },
     emptyTitle: 'First demonstrations in preparation',
     emptyText: 'We are preparing technical demonstrations of web development, automation and AI. They will be published here, clearly labelled. In the meantime, we are happy to walk you through our approach on a call.',

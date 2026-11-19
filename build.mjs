@@ -15,7 +15,7 @@ const ROOT = dirname(fileURLToPath(import.meta.url));
 const DIST = join(ROOT, 'dist');
 const DICTS = { en, it, fr };
 const DEFAULT_LANG = config.languages[0];
-const PROJECT_TYPES = ['client', 'personal', 'demo', 'prototype'];
+const PROJECT_TYPES = ['client', 'internship', 'personal', 'demo', 'prototype', 'academic'];
 
 const PAGES = [
   { key: 'home', path: '' },
