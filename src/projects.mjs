@@ -56,6 +56,24 @@ export default [
     },
   },
   {
+    slug: 'cv-express',
+    type: 'personal',
+    year: 2026,
+    url: 'https://www.moncvexpress.com/',
+    repo: `${GH}/CV`,
+    stack: ['Python', 'PostgreSQL', 'Docker', 'Cloudflare'],
+    title: {
+      en: 'CV.express — online document generator',
+      it: 'CV.express — generatore di documenti online',
+      fr: 'CV.express — générateur de documents en ligne',
+    },
+    summary: {
+      en: 'Live web application (moncvexpress.com): free creation of CVs, cover letters, requests and certificates, location maps and family trees as PDF, with European and African templates, in French, English and Italian. User accounts, email confirmation, automated tests and daily backups.',
+      it: 'Applicazione web in produzione (moncvexpress.com): creazione gratuita in PDF di CV, lettere di presentazione, domande e attestati, piantine di localizzazione e alberi genealogici, con modelli europei e africani, in francese, inglese e italiano. Account utente, conferma via email, test automatici e backup giornalieri.',
+      fr: 'Application web en production (moncvexpress.com) : création gratuite en PDF de CV, lettres de motivation, demandes et attestations, plans de localisation et arbres généalogiques, avec des modèles européens et africains, en français, anglais et italien. Comptes utilisateurs, confirmation par email, tests automatisés et sauvegardes quotidiennes.',
+    },
+  },
+  {
     slug: 'csv-dashboard',
     type: 'demo',
     year: 2026,
@@ -70,23 +88,6 @@ export default [
       en: 'Import a spreadsheet export, clean it automatically and get a monthly dashboard with key figures — entirely in the browser, no data uploaded.',
       it: 'Importa l’esportazione di un foglio di calcolo, la pulisce in automatico e genera una dashboard mensile con i dati chiave — tutto nel browser, senza caricare dati online.',
       fr: 'Importe l’export d’un tableur, le nettoie automatiquement et génère un tableau de bord mensuel avec les chiffres clés — entièrement dans le navigateur, sans envoi de données.',
-    },
-  },
-  {
-    slug: 'cv-express',
-    type: 'personal',
-    year: 2026,
-    repo: `${GH}/CV`,
-    stack: ['Python', 'PostgreSQL', 'Docker', 'pytest'],
-    title: {
-      en: 'CV.express — CV & cover letter generator',
-      it: 'CV.express — generatore di CV e lettere',
-      fr: 'CV.express — générateur de CV et de lettres',
-    },
-    summary: {
-      en: 'Web application that generates CVs and cover letters as PDF in French, English and Italian, with user accounts, email confirmation, automated tests and daily database backups.',
-      it: 'Applicazione web che genera CV e lettere di presentazione in PDF in francese, inglese e italiano, con account utente, conferma via email, test automatici e backup giornalieri del database.',
-      fr: 'Application web qui génère des CV et des lettres de motivation en PDF en français, anglais et italien, avec comptes utilisateurs, confirmation par email, tests automatisés et sauvegardes quotidiennes de la base.',
     },
   },
   {
